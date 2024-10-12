@@ -1,0 +1,24 @@
+<div class="custom-header-info">
+  <div class="avatar-section">
+    <img src="<%= User.current.avatar_url %>" alt="Avatar" class="user-avatar" />
+  </div>
+  <div class="user-details">
+    <p class="user-name"><%= User.current.name %></p>
+    <p class="user-level">Level: <%= User.current.level %> - Klasse: Krieger</p> <!-- Beispielklasse "Krieger" -->
+    
+    <div class="progress-bar health-bar">
+      <div class="progress-fill" style="width: <%= User.current.leben %>%;">Leben: <%= User.current.leben %>%</div>
+    </div>
+
+    <div class="progress-bar mana-bar">
+      <div class="progress-fill" style="width: <%= User.current.mana %>%;"></div>
+    </div>
+
+    <div class="progress-bar exp-bar">
+      <div class="progress-fill" style="width: <%= User.current.exp %>%;"></div>
+    </div>
+    <p style="font-size: 0.9em; text-align: right; color: #777;">
+      EXP: <%= User.current.exp %> 
+    </p>
+  </div>
+</div>

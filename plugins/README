@@ -1,1 +1,8 @@
 Put your Redmine plugins here.
+
+sudo RAILS_ENV=development rails server
+rake redmine:plugins:migrate NAME=x0s37h0x_Gamification RAILS_ENV=development
+bundle exec rake redmine:plugins:migrate NAME=x0s37h0x_Gamification RAILS_ENV=development
+
+
+# Auf null setzen : sudo rake redmine:plugins:migrate NAME=x0s37h0x_Gamification VERSION=0 RAILS_ENV=development

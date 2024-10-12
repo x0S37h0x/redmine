@@ -1,0 +1,6 @@
+de:
+  label_exp_settings: "EXP-Einstellungen"
+  label_exp_settings_description: "Legen Sie die Exp-Werte für verschiedene Komplexitätsstufen fest."
+  label_low_exp: "EXP für niedrige Komplexität"
+  label_medium_exp: "EXP für mittlere Komplexität"
+  label_high_exp: "EXP für hohe Komplexität"

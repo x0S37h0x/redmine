@@ -1,0 +1,25 @@
+<h1>Level-Anforderungen</h1>
+
+<%= link_to 'Neue Level-Anforderung', new_level_requirement_path, class: 'btn btn-primary' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th>Erforderliche Erfahrung (EXP)</th>
+      <th>Aktionen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @level_requirements.each do |requirement| %>
+      <tr>
+        <td><%= requirement.level %></td>
+        <td><%= requirement.exp_required %></td>
+        <td>
+          <%= link_to 'Bearbeiten', edit_level_requirement_path(requirement), class: 'btn btn-secondary' %>
+          <%= link_to 'Löschen', level_requirement_path(requirement), method: :delete, data: { confirm: 'Bist du sicher?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
