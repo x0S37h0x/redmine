@@ -1,22 +1,14 @@
-<%= form_with(model: @config, url: { action: :update }, local: true) do |f| %>
-  <fieldset>
-    <legend>Experience Points Settings</legend>
+<%= link_to 'Bearbeiten', edit_configurations_path %>
+<%= form_for @config, url: configurations_path, method: :patch do |f| %>
+  <!-- Formularfelder für Konfigurationswerte -->
+  <%= f.label :exp_leicht, 'Experience für Leicht' %>
+  <%= f.number_field :exp_leicht %>
 
-    <p>
-      <%= f.label :exp_leicht, "Experience Points for 'leicht'" %>
-      <%= f.number_field :exp_leicht, size: 5 %>
-    </p>
+  <%= f.label :exp_mittel, 'Experience für Mittel' %>
+  <%= f.number_field :exp_mittel %>
 
-    <p>
-      <%= f.label :exp_mittel, "Experience Points for 'mittel'" %>
-      <%= f.number_field :exp_mittel, size: 5 %>
-    </p>
+  <%= f.label :exp_schwer, 'Experience für Schwer' %>
+  <%= f.number_field :exp_schwer %>
 
-    <p>
-      <%= f.label :exp_schwer, "Experience Points for 'schwer'" %>
-      <%= f.number_field :exp_schwer, size: 5 %>
-    </p>
-
-    <%= f.submit "Speichern", class: "button" %>
-  </fieldset>
+  <%= f.submit 'Speichern' %>
 <% end %>

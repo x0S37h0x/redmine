@@ -15,8 +15,14 @@ module IssuePatch
   def increase_user_exp
     # Retrieve the value of 'Komplexität' custom field
     complexity = custom_field_value(CustomField.find_by_name('Komplexität'))
+    
+    # Fallback, falls Komplexität nicht vorhanden ist
+    unless complexity
+      Rails.logger.warn "No complexity found; skipping exp increase."
+      return
+    end
 
-    # Load exp_values from the GamificationConfig model
+    # Load exp_values from GamificationConfig
     config = GamificationConfig.first
     exp_values = {
       'leicht' => config&.exp_leicht || 10,
@@ -24,22 +30,22 @@ module IssuePatch
       'schwer' => config&.exp_schwer || 30
     }
 
-    # Logging for debugging
+    # Logging zur Überprüfung
     Rails.logger.info "Loaded exp_values from GamificationConfig: #{exp_values.inspect}"
     Rails.logger.info "Selected complexity: #{complexity}"
 
-    # Define experience increase based on selected complexity
+    # Setze die exp_increase basierend auf der Komplexität
     exp_increase = exp_values[complexity] || 10
     Rails.logger.info "Experience increase: #{exp_increase}"
 
-    # Apply experience increase and check for level-up if user is assigned
+    # Stelle sicher, dass `assigned_to` vorhanden ist
     if assigned_to
       Rails.logger.info "Initial EXP: #{assigned_to.exp}, Level: #{assigned_to.level}"
 
-      # Add experience points
+      # Erfahrungspunkte hinzufügen
       assigned_to.exp += exp_increase
 
-      # Level-up logic
+      # Level-Up-Logik
       while assigned_to.exp >= next_level_exp(assigned_to.level)
         Rails.logger.info "Level-Up! Previous level: #{assigned_to.level}"
         assigned_to.level += 1
@@ -47,11 +53,11 @@ module IssuePatch
         Rails.logger.info "New level: #{assigned_to.level}, Remaining EXP: #{assigned_to.exp}"
       end
 
-      # Save updated user
+      # Aktualisiere und speichere den Benutzer
       if assigned_to.save
         Rails.logger.info "User saved successfully with updated EXP and Level."
       else
-        Rails.logger.error "Failed to save user: #{assigned_to.errors.full_messages.join(", ")}"
+        Rails.logger.error "Failed to save user: #{assigned_to.errors.full_messages.join(', ')}"
       end
     else
       Rails.logger.warn "No user assigned; cannot increase EXP."

@@ -1,20 +1,15 @@
-# plugins/x0s37h0x_Gamification/app/controllers/configurations_controller.rb
 class ConfigurationsController < ApplicationController
-  # Setzt sicher, dass nur Administratoren Zugriff haben
-  before_action :require_admin
-
+      layout 'admin'  # Setzt das Admin-Layout für alle Aktionen
   def edit
-    @config = GamificationConfig.first_or_initialize
+    @config = GamificationConfig.first || GamificationConfig.new
   end
 
   def update
-    @config = GamificationConfig.first_or_initialize
+    @config = GamificationConfig.first || GamificationConfig.new
     if @config.update(config_params)
-      flash[:notice] = "Einstellungen erfolgreich gespeichert."
-      redirect_to action: :edit
+      redirect_to edit_configurations_path, notice: 'Einstellungen wurden erfolgreich aktualisiert.'
     else
-      flash[:error] = "Fehler beim Speichern der Einstellungen."
-      render :edit
+      render :edit, alert: 'Fehler beim Aktualisieren der Einstellungen.'
     end
   end
 
