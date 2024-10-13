@@ -1,0 +1,22 @@
+<%= form_with(model: @config, url: { action: :update }, local: true) do |f| %>
+  <fieldset>
+    <legend>Experience Points Settings</legend>
+
+    <p>
+      <%= f.label :exp_leicht, "Experience Points for 'leicht'" %>
+      <%= f.number_field :exp_leicht, size: 5 %>
+    </p>
+
+    <p>
+      <%= f.label :exp_mittel, "Experience Points for 'mittel'" %>
+      <%= f.number_field :exp_mittel, size: 5 %>
+    </p>
+
+    <p>
+      <%= f.label :exp_schwer, "Experience Points for 'schwer'" %>
+      <%= f.number_field :exp_schwer, size: 5 %>
+    </p>
+
+    <%= f.submit "Speichern", class: "button" %>
+  </fieldset>
+<% end %>

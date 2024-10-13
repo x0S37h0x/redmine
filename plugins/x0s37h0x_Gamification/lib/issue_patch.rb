@@ -1,3 +1,4 @@
+# plugins/x0s37h0x_Gamification/lib/issue_patch.rb
 module IssuePatch
   extend ActiveSupport::Concern
 
@@ -14,14 +15,17 @@ module IssuePatch
   def increase_user_exp
     # Retrieve the value of 'Komplexität' custom field
     complexity = custom_field_value(CustomField.find_by_name('Komplexität'))
-  # Force reload of exp_values each time increase_user_exp is called
-  Setting.clear_cache
-    # Load exp_values from settings, force JSON conversion, and parse back to a plain hash
-    exp_values = Setting.plugin_x0s37h0x_Gamification['exp_values'] || { 'leicht' => 10, 'mittel' => 20, 'schwer' => 30 }
-    exp_values = JSON.parse(exp_values.to_json) # Ensures plain hash compatibility
+
+    # Load exp_values from the GamificationConfig model
+    config = GamificationConfig.first
+    exp_values = {
+      'leicht' => config&.exp_leicht || 10,
+      'mittel' => config&.exp_mittel || 20,
+      'schwer' => config&.exp_schwer || 30
+    }
 
     # Logging for debugging
-    Rails.logger.info "Loaded exp_values: #{exp_values.inspect}"
+    Rails.logger.info "Loaded exp_values from GamificationConfig: #{exp_values.inspect}"
     Rails.logger.info "Selected complexity: #{complexity}"
 
     # Define experience increase based on selected complexity

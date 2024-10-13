@@ -1,25 +1,19 @@
+<% exp_values = @exp_values || { 'leicht' => 10, 'mittel' => 20, 'schwer' => 30 } %>
 <fieldset>
   <legend>Experience Points Settings</legend>
-
+<p> Defekt und funktioniert nicht wird zurück gebaut oder später implementiert</p>
   <p>
     <label for="plugin_x0s37h0x_Gamification_exp_values_leicht">Experience Points for 'leicht':</label>
-    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][leicht]',
-                       @exp_values['leicht'] || 10,
-                       size: 5,
-                       id: "plugin_x0s37h0x_Gamification_exp_values_leicht" %>
+    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][leicht]', exp_values['leicht'], size: 5 %>
   </p>
+
   <p>
     <label for="plugin_x0s37h0x_Gamification_exp_values_mittel">Experience Points for 'mittel':</label>
-    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][mittel]',
-                       @exp_values['mittel'] || 20,
-                       size: 5,
-                       id: "plugin_x0s37h0x_Gamification_exp_values_mittel" %>
+    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][mittel]', exp_values['mittel'], size: 5 %>
   </p>
+
   <p>
     <label for="plugin_x0s37h0x_Gamification_exp_values_schwer">Experience Points for 'schwer':</label>
-    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][schwer]',
-                       @exp_values['schwer'] || 30,
-                       size: 5,
-                       id: "plugin_x0s37h0x_Gamification_exp_values_schwer" %>
+    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][schwer]', exp_values['schwer'], size: 5 %>
   </p>
 </fieldset>
