@@ -1,18 +1,25 @@
 <fieldset>
-  <legend>Komplexität Einstellungen</legend>
+  <legend>Experience Points Settings</legend>
 
   <p>
-    <label for="plugin_x0s37h0x_Gamification_exp_values_low">Erfahrungspunkte für 'leicht':</label>
-    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][low]', Setting.plugin_x0s37h0x_Gamification['exp_values']['low'], size: 5 %>
+    <label for="plugin_x0s37h0x_Gamification_exp_values_leicht">Experience Points for 'leicht':</label>
+    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][leicht]',
+                       @exp_values['leicht'] || 10,
+                       size: 5,
+                       id: "plugin_x0s37h0x_Gamification_exp_values_leicht" %>
   </p>
-
   <p>
-    <label for="plugin_x0s37h0x_Gamification_exp_values_medium">Erfahrungspunkte für 'mittel':</label>
-    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][medium]', Setting.plugin_x0s37h0x_Gamification['exp_values']['medium'], size: 5 %>
+    <label for="plugin_x0s37h0x_Gamification_exp_values_mittel">Experience Points for 'mittel':</label>
+    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][mittel]',
+                       @exp_values['mittel'] || 20,
+                       size: 5,
+                       id: "plugin_x0s37h0x_Gamification_exp_values_mittel" %>
   </p>
-
   <p>
-    <label for="plugin_x0s37h0x_Gamification_exp_values_high">Erfahrungspunkte für 'schwer':</label>
-    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][high]', Setting.plugin_x0s37h0x_Gamification['exp_values']['high'], size: 5 %>
+    <label for="plugin_x0s37h0x_Gamification_exp_values_schwer">Experience Points for 'schwer':</label>
+    <%= text_field_tag 'settings[plugin_x0s37h0x_Gamification][exp_values][schwer]',
+                       @exp_values['schwer'] || 30,
+                       size: 5,
+                       id: "plugin_x0s37h0x_Gamification_exp_values_schwer" %>
   </p>
 </fieldset>

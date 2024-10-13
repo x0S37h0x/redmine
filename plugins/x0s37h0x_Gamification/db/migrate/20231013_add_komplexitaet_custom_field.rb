@@ -1,4 +1,3 @@
-# plugins/x0s37h0x_Gamification/db/migrate/20231013_add_komplexitaet_custom_field.rb
 class AddKomplexitaetCustomField < ActiveRecord::Migration[6.0]
   def up
     # Create the "Komplexität" custom field if it doesn't already exist
@@ -13,14 +12,32 @@ class AddKomplexitaetCustomField < ActiveRecord::Migration[6.0]
         default_value: 'leicht'
       )
 
-      # Assign the custom field to specific trackers, e.g., "Tägliche Aufgabe"
+      # Assign the custom field to the "Tägliche Aufgabe" tracker if it exists
       tracker = Tracker.find_by(name: 'Tägliche Aufgabe')
       complexity_field.trackers << tracker if tracker.present?
+
+      # Assign the custom field to all current projects
+      Project.find_each do |project|
+        project.issue_custom_fields << complexity_field unless project.issue_custom_fields.include?(complexity_field)
+      end
+
+      # Ensure the custom field is added to new projects by hooking into the project creation process
+      Project.class_eval do
+        after_create do
+          self.issue_custom_fields << complexity_field unless self.issue_custom_fields.include?(complexity_field)
+        end
+      end
     end
   end
 
   def down
-    # Remove the "Komplexität" custom field on rollback
-    CustomField.find_by(name: 'Komplexität', type: 'IssueCustomField')&.destroy
+    # Remove the "Komplexität" custom field from all projects and destroy it
+    complexity_field = CustomField.find_by(name: 'Komplexität', type: 'IssueCustomField')
+    if complexity_field
+      Project.find_each do |project|
+        project.issue_custom_fields.delete(complexity_field)
+      end
+      complexity_field.destroy
+    end
   end
 end

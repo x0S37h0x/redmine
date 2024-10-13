@@ -14,11 +14,11 @@
       <div class="progress-fill" style="width: <%= User.current.mana %>%;"></div>
     </div>
 
-    <div class="progress-bar exp-bar">
-      <div class="progress-fill" style="width: <%= User.current.exp %>%;"></div>
+     <div class="progress-bar exp-bar">
+      <%# Calculate the percentage of current EXP toward the next level %>
+      <div class="progress-fill" style="width: <%= (User.current.exp.to_f / User.current.max_exp) * 100 %>%;">
+        <%= User.current.exp %> / <%= User.current.max_exp %> EXP
+      </div>
     </div>
-    <p style="font-size: 0.9em; text-align: right; color: #777;">
-      EXP: <%= User.current.exp %> 
-    </p>
   </div>
 </div>
