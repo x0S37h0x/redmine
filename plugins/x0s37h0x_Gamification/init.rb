@@ -10,6 +10,8 @@ Redmine::Plugin.register :x0s37h0x_Gamification do
   settings default: { 'exp_values' => { 'leicht' => 10, 'mittel' => 20, 'schwer' => 30 } },
            partial: 'settings/x0s37h0x_Gamification_settings'
 
+  menu :top_menu, :dashboard, { controller: 'dashboard', action: 'index' }, caption: 'Dashboard'
+
   # Menü im Admin-Bereich hinzufügen
   menu :admin_menu, :x0s37h0x_gamification, { controller: 'level_requirements', action: 'index' }, caption: 'Gamification', html: { class: 'icon icon-settings' }
   menu :admin_menu, :level_requirements, { controller: 'level_requirements', action: 'index' }, caption: 'Level Requirements', parent: :x0s37h0x_gamification

@@ -1,0 +1,4 @@
+// plugins/x0s37h0x_Gamification/.babelrc
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
