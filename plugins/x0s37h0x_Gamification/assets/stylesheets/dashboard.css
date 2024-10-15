@@ -1,0 +1,53 @@
+/*
+ *= require_self
+*/
+.dashboard-columns {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.dashboard-column {
+  flex: 1;
+}
+
+.section-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.section-container h2 {
+  margin-top: 0;
+  font-size: 1.4em;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.task-checkbox {
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.task-content {
+  flex-grow: 1;
+}
+
+.task-content strong {
+  font-size: 1.1em;
+  color: #333;
+}

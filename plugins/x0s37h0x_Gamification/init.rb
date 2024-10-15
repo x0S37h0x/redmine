@@ -38,7 +38,13 @@ Rails.configuration.to_prepare do
 end
 
 # Zusätzliche Assets und Hooks laden
-Rails.application.config.assets.precompile += %w(x0s37h0x_Gamification/profile_styles.css)
+Rails.application.config.assets.precompile += %w(
+  x0s37h0x_Gamification/profile_styles.css 
+  x0s37h0x_Gamification/dashboard.css
+  x0s37h0x_Gamification/task_toggle.js
+)
+#Rails.application.config.assets.precompile += %w(x0s37h0x_Gamification/task_toggle.js)
+#Rails.application.config.assets.precompile += %w(x0s37h0x_Gamification/dashboard.css)
 Rails.autoloaders.main.push_dir("#{__dir__}/lib")
 
 # User- und Issue-Patch laden

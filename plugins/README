@@ -5,6 +5,8 @@ rake redmine:plugins:migrate NAME=x0s37h0x_Gamification RAILS_ENV=development
 bundle exec rake redmine:plugins:migrate NAME=x0s37h0x_Gamification RAILS_ENV=development
 
 
+cp -R plugins/x0s37h0x_Gamification/assets/* public/plugin_assets/x0s37h0x_Gamification/
+
 # Auf null setzen : sudo rake redmine:plugins:migrate NAME=x0s37h0x_Gamification VERSION=0 RAILS_ENV=development
 
 https://guides.rubyonrails.org/

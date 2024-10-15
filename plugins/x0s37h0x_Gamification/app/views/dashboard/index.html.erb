@@ -1,26 +1,55 @@
-<div>
-  <h2>Tägliche Aufgaben</h2>
-  <ul>
-    <% @daily_tasks.each do |task| %>
-      <li><strong><%= task.subject %></strong>: <%= task.description %></li>
-    <% end %>
-  </ul>
-</div>
+<%= stylesheet_link_tag 'plugin_assets/x0s37h0x_Gamification/dashboard', media: 'all' %>
+<%= javascript_include_tag 'plugin_assets/x0s37h0x_Gamification/task_toggle' %>
 
-<div>
-  <h2>ToDos</h2>
-  <ul>
-    <% @todos.each do |todo| %>
-      <li><strong><%= todo.subject %></strong>: <%= todo.description %></li>
-    <% end %>
-  </ul>
-</div>
+<div class="dashboard-columns">
+  <div class="dashboard-column habits-column">
+    <div class="section-container">
+      <h2>Gewohnheiten</h2>
+      <ul>
+        <% @habits.each do |habit| %>
+          <li class="task-item" data-id="<%= habit.id %>">
+            <input type="checkbox" class="task-checkbox" <% if habit.status == 'closed' %> checked <% end %> >
+            <div class="task-content">
+              <strong><%= habit.subject %></strong>
+              <p><%= habit.description %></p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 
-<div>
-  <h2>Gewohnheiten</h2>
-  <ul>
-    <% @habits.each do |habit| %>
-      <li><strong><%= habit.subject %></strong>: <%= habit.description %></li>
-    <% end %>
-  </ul>
+  <div class="dashboard-column todos-column">
+    <div class="section-container">
+      <h2>ToDos</h2>
+      <ul>
+        <% @todos.each do |todo| %>
+          <li class="task-item" data-id="<%= todo.id %>">
+            <input type="checkbox" class="task-checkbox" <% if todo.status == 'closed' %> checked <% end %> >
+            <div class="task-content">
+              <strong><%= todo.subject %></strong>
+              <p><%= todo.description %></p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dashboard-column daily-tasks-column">
+    <div class="section-container">
+      <h2>Tägliche Aufgaben</h2>
+      <ul>
+        <% @daily_tasks.each do |task| %>
+          <li class="task-item" data-id="<%= task.id %>">
+            <input type="checkbox" class="task-checkbox" <% if task.status == 'closed' %> checked <% end %> >
+            <div class="task-content">
+              <strong><%= task.subject %></strong>
+              <p><%= task.description %></p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>

@@ -8,9 +8,8 @@ module UserPatch
   end
 
   def avatar_url
-    # Verändere die Avatar-URL oder füge Logik hinzu
-    super || "/images/default_avatar.png"
-  end
+  super || ActionController::Base.helpers.asset_path('images/default_avatar.png')
+end
 
   # Fetches the EXP required for the next level
   def max_exp
