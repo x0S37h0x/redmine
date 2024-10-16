@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '>= 3.1.0', '< 3.4.0'
 
+
 gem 'rails', '7.2.1'
 gem 'rouge', '~> 4.2'
 gem 'mini_mime', '~> 1.1.0'
@@ -16,6 +17,7 @@ gem 'addressable'
 gem 'rubyzip', '~> 2.3.0'
 gem 'propshaft', '~> 0.8.0'
 gem 'rack', '>= 3.1.3'
+#gem 'rails-observers'
 
 #  Ruby Standard Gems
 gem 'csv', '~> 3.2.8'

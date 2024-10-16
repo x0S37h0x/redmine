@@ -6,4 +6,6 @@ RedmineApp::Application.routes.draw do
   resources :general_todos, only: [:index, :show, :create, :update, :destroy]
   get 'dashboard', to: 'dashboard#index'
   patch 'tasks/:id/toggle_status', to: 'tasks#toggle_status'
+  get 'dashboard/calendar_only', to: 'dashboard#calendar_only'
+get 'dashboard/calendar.ics', to: 'dashboard#calendar_ics', as: 'calendar_ics'
 end

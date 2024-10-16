@@ -1,0 +1,10 @@
+<h2>Kalenderübersicht</h2>
+<ul class="calendar-list">
+  <% @events.each do |event| %>
+    <li>
+      <strong><%= event.subject %></strong> - 
+      <span>Fällig am: <%= event.due_date %></span>
+      <span>Projekt: <%= event.project.name %></span>
+    </li>
+  <% end %>
+</ul>

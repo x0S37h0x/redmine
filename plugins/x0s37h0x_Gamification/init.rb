@@ -1,3 +1,8 @@
+plugin_gemfile = File.expand_path("../Gemfile", __FILE__)
+if File.exist?(plugin_gemfile)
+  ENV['BUNDLE_GEMFILE'] ||= plugin_gemfile
+  require 'bundler/setup'
+end
 Redmine::Plugin.register :x0s37h0x_Gamification do
   name 'x0s37h0x_Gamification'
   author 'x0s37h0x'
@@ -47,8 +52,19 @@ Rails.application.config.assets.precompile += %w(
 #Rails.application.config.assets.precompile += %w(x0s37h0x_Gamification/dashboard.css)
 Rails.autoloaders.main.push_dir("#{__dir__}/lib")
 
+#Rails.application.config.to_prepare do
+#  require_dependency File.expand_path('lib/project_patch', __dir__)
+#  Project.prepend ProjectPatch
+#end
+
 # User- und Issue-Patch laden
+
+require_relative 'lib/project_observer'
+ActiveRecord::Base.observers = :project_observer
+ActiveRecord::Base.instantiate_observers
 require_relative 'lib/user_patch'
 require_relative 'lib/issue_patch'
+#require_relative 'lib/project_patch'
+
 require_relative 'lib/x0s37h0x_Gamification_admin_menu_hook'
 require_relative 'lib/x0s37h0x_Gamification_hook' if File.exist?(File.join(__dir__, 'lib', 'x0s37h0x_Gamification_hook.rb'))
