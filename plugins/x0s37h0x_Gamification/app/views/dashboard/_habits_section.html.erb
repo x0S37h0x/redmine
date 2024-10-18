@@ -1,0 +1,17 @@
+<div id="habits-column" class="dashboard-column habits-column">
+  <div class="section-container">
+    <h2>Gewohnheiten</h2>
+    <button type="button" class="btn-style open-modal" data-target="newHabitModal">Neue Gewohnheit hinzufügen</button>
+    <ul>
+      <% @habits.each do |habit| %>
+        <li class="task-item" data-id="<%= habit.id %>">
+          <input type="checkbox" class="task-checkbox" <% if habit.status == 'closed' %> checked <% end %> >
+          <div class="task-content">
+            <strong><%= habit.subject %></strong>
+            <p><%= habit.description %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

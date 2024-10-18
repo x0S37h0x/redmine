@@ -1,0 +1,30 @@
+<div id="newDailyTaskModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Neue tägliche Aufgabe hinzufügen</h5>
+        <button type="button" class="close close-modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="daily-task-form-message" class="form-message" style="display: none;"></div>
+        <%= form_for @new_daily_task, url: new_daily_task_path, remote: true do |f| %>
+          <div class="form-group">
+            <%= f.label :subject, 'Titel' %>
+            <%= f.text_field :subject, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :description, 'Beschreibung' %>
+            <%= f.text_area :description, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Anlegen', class: 'btn btn-primary' %>
+        <% end %>
+        <button type="button" class="btn btn-secondary close-modal">Schließen</button>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary close-modal">Schließen</button> -->
+      </div>
+    </div>
+  </div>
+</div>

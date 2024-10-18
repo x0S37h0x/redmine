@@ -1,117 +1,24 @@
 <meta name="csrf-token" content="<%= form_authenticity_token %>">
 <%= stylesheet_link_tag 'plugin_assets/x0s37h0x_Gamification/dashboard', media: 'all' %>
-<%= javascript_include_tag 'plugin_assets/x0s37h0x_Gamification/task_toggle' %>
+<%= javascript_include_tag 'plugin_assets/x0s37h0x_Gamification/dashboard' %>
+<%= javascript_include_tag 'plugin_assets/x0s37h0x_Gamification/modal' %>
 
-<div class="dashboard-columns">
-  <!-- Habits Section on the Left -->
-  <div class="dashboard-column habits-column">
-    <div class="section-container">
-      <h2>Gewohnheiten</h2>
-      <ul>
-        <% @habits.each do |habit| %>
-          <li class="task-item" data-id="<%= habit.id %>">
-            <input type="checkbox" class="task-checkbox" <% if habit.status == 'closed' %> checked <% end %> >
-            <div class="task-content">
-              <strong><%= habit.subject %></strong>
-              <p><%= habit.description %></p>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Daily Tasks Section in the Center -->
-  <div class="dashboard-column daily-tasks-column">
-    <div class="section-container">
-      <h2>Tägliche Aufgaben</h2>
-      <ul>
-        <% @daily_tasks.each do |task| %>
-          <li class="task-item" data-id="<%= task.id %>">
-            <input type="checkbox" class="task-checkbox" <% if task.status == 'closed' %> checked <% end %> >
-            <div class="task-content">
-              <strong><%= task.subject %></strong>
-              <p><%= task.description %></p>
-              <p><em>Fällig am: <%= task.due_date %></em></p>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <!-- ToDos Section on the Right -->
-  <div class="dashboard-column todos-column">
-    <div class="section-container">
-      <h2>ToDos</h2>
-      <label for="project-filter">Projekt auswählen:</label>
-      <select id="project-filter" onchange="filterByProject()">
-        <option value="">Alle Projekte</option>
-        <% @user_projects.each do |project| %>
-          <option value="<%= project.id %>"><%= project.name %></option>
-        <% end %>
-      </select>
-      <div class="filter-buttons">
-        <button onclick="filterTodos('all')">Alle</button>
-        <button onclick="filterTodos('due_today')">Fällig Heute</button>
-      </div>
-      <% @todos_by_project.each do |project, todos| %>
-        <div data-project-id="<%= project.id %>">
-          <h3><%= project.name %></h3>
-          <ul>
-            <% todos.each do |todo| %>
-              <li class="task-item" data-id="<%= todo.id %>" data-due-date="<%= todo.due_date %>">
-                <input type="checkbox" class="task-checkbox" <% if todo.status == 'closed' %> checked <% end %> >
-                <div class="task-content">
-                  <strong><%= todo.subject %></strong>
-                  <p><%= todo.description %></p>
-                  <p><em>Fällig am: <%= todo.due_date %></em></p>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
+<div id="dashboard-columns" class="dashboard-columns">
+  <%= render 'dashboard/habits_section' %>
+  <%= render 'dashboard/daily_tasks_section' %>
+  <%= render 'dashboard/todos_section' %>
+  
   <!-- Calendar Section -->
   <div class="dashboard-column calendar-column">
-  <div class="section-container">
-    <h2>Kalender</h2>
-    <%= render partial: 'common/calendar', locals: { calendar: @calendar } %>
-    <p><a href="<%= calendar_ics_path %>" target="_blank">Mit anderen Kalendern synchronisieren</a></p>
-
+    <div class="section-container">
+      <h2>Kalender</h2>
+      <%= render partial: 'common/calendar', locals: { calendar: @calendar } %>
+      <p><a href="<%= calendar_ics_path %>" target="_blank">Mit anderen Kalendern synchronisieren</a></p>
+    </div>
   </div>
 </div>
-</div>
 
-<script>
-  function filterTodos(filterType) {
-    const todos = document.querySelectorAll('.todos-column .task-item');
-    todos.forEach(todo => {
-      const dueDate = new Date(todo.dataset.dueDate);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0); // Set time to start of the day for comparison
-
-      if (filterType === 'due_today') {
-        todo.style.display = dueDate.toDateString() === today.toDateString() ? 'flex' : 'none';
-      } else {
-        todo.style.display = 'flex';
-      }
-    });
-  }
-
-  function filterByProject() {
-    const selectedProjectId = document.getElementById('project-filter').value;
-    const projectSections = document.querySelectorAll('.todos-column [data-project-id]');
-
-    projectSections.forEach(section => {
-      if (selectedProjectId === "" || section.dataset.projectId === selectedProjectId) {
-        section.style.display = 'block';
-      } else {
-        section.style.display = 'none';
-      }
-    });
-  }
-</script>
+<!-- Modals (ausgelagert) -->
+<%= render partial: 'dashboard/modals/new_habit' %>
+<%= render partial: 'dashboard/modals/new_daily_task' %>
+<%= render partial: 'dashboard/modals/new_todo' %>

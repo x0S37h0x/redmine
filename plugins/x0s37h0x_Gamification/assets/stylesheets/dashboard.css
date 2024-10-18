@@ -78,3 +78,46 @@ ul {
   width: 100%;
   height: auto;
 }
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  left: 50%; /* Center horizontally */
+  top: 50%; /* Center vertically */
+  width: 500px; /* Modal width */
+  transform: translate(-50%, -50%); /* Adjust for the modal size (moves it up and left by 50% of its size) */
+  background-color: white; /* Background for the modal itself */
+  padding: 20px; /* Add padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for visual effect */
+  border-radius: 10px; /* Optional rounded corners */
+  max-height: 90vh; /* To prevent it from being too tall */
+  overflow-y: auto; /* Allow scrolling if content is too long */
+}
+
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+}
+
+/* Close Button */
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

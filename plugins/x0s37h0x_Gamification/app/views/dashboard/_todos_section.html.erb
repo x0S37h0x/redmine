@@ -1,0 +1,34 @@
+<div id="todos-column" class="dashboard-column todos-column">
+  <div class="section-container">
+    <h2>ToDos</h2>
+    <button type="button" class="btn-style open-modal" data-target="newTodoModal">Neues ToDo hinzufügen</button>
+    <label for="project-filter">Projekt auswählen:</label>
+    <select id="project-filter" onchange="filterByProject()">
+      <option value="">Alle Projekte</option>
+      <% @user_projects.each do |project| %>
+        <option value="<%= project.id %>"><%= project.name %></option>
+      <% end %>
+    </select>
+    <div class="filter-buttons">
+      <button onclick="filterTodos('all')">Alle</button>
+      <button onclick="filterTodos('due_today')">Fällig Heute</button>
+    </div>
+    <% @todos_by_project.each do |project, todos| %>
+      <div data-project-id="<%= project.id %>">
+        <h3><%= project.name %></h3>
+        <ul>
+          <% todos.each do |todo| %>
+            <li class="task-item" data-id="<%= todo.id %>" data-due-date="<%= todo.due_date %>">
+              <input type="checkbox" class="task-checkbox" <% if todo.status == 'closed' %> checked <% end %> >
+              <div class="task-content">
+                <strong><%= todo.subject %></strong>
+                <p><%= todo.description %></p>
+                <p><em>Fällig am: <%= todo.due_date %></em></p>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div id="daily_tasks-column" class="dashboard-column daily-tasks-column">
+  <div class="section-container">
+    <h2>Tägliche Aufgaben</h2>
+    <button type="button" class="btn-style open-modal" data-target="newDailyTaskModal">Neue tägliche Aufgabe hinzufügen</button>
+    <ul>
+      <% @daily_tasks.each do |task| %>
+        <li class="task-item" data-id="<%= task.id %>">
+          <input type="checkbox" class="task-checkbox" <% if task.status == 'closed' %> checked <% end %> >
+          <div class="task-content">
+            <strong><%= task.subject %></strong>
+            <p><%= task.description %></p>
+            <p><em>Fällig am: <%= task.due_date %></em></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
