@@ -1,0 +1,20 @@
+ToDO:
+
+Backend :
+    Add Classes
+    Add Attributes
+    Add Fails + wins
+
+Dashboard : 
+    Design verbesserungen
+    Todos Anklick und bearbeitbar machen
+    Fälligkeitsdatum + Komplexität in der Erstellung einfügen
+    Calender Section mit aktuallisieren.
+
+
+Gewohnheiten:
+    System für Gewohnheiten ausdenken
+
+
+
+Ruby + Ruby on Rails lernen für weitere Projekte.
