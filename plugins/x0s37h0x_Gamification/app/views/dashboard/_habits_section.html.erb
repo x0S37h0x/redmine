@@ -4,8 +4,8 @@
     <button type="button" class="btn-style open-modal" data-target="newHabitModal">Neue Gewohnheit hinzufügen</button>
     <ul>
       <% @habits.each do |habit| %>
-        <li class="task-item" data-id="<%= habit.id %>">
-          <input type="checkbox" class="task-checkbox" <% if habit.status == 'closed' %> checked <% end %> >
+        <li class="task-item" data-id="<%= habit.id %>" onclick="openEditHabitModal(<%= habit.id %>)">
+          <input type="checkbox" class="task-checkbox" <% if habit.status == 'closed' %> checked <% end %>>
           <div class="task-content">
             <strong><%= habit.subject %></strong>
             <p><%= habit.description %></p>

@@ -3,6 +3,8 @@
 <%= javascript_include_tag 'plugin_assets/x0s37h0x_Gamification/dashboard' %>
 <%= javascript_include_tag 'plugin_assets/x0s37h0x_Gamification/modal' %>
 
+
+<div id="custom-header-info"></div>
 <div id="dashboard-columns" class="dashboard-columns">
   <%= render 'dashboard/habits_section' %>
   <%= render 'dashboard/daily_tasks_section' %>
@@ -22,3 +24,5 @@
 <%= render partial: 'dashboard/modals/new_habit' %>
 <%= render partial: 'dashboard/modals/new_daily_task' %>
 <%= render partial: 'dashboard/modals/new_todo' %>
+
+<%= render partial: 'dashboard/modals/edit_daily_task' %>

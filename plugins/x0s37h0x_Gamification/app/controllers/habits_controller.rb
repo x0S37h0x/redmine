@@ -1,32 +1,48 @@
-# app/controllers/habits_controller.rb
 class HabitsController < ApplicationController
-  before_action :set_habit, only: [:show, :update, :destroy]
-
-  def index
-    @habits = current_user.habits
-    render json: @habits
+  before_action :find_habit, only: [:update, :destroy]
+   def new
+    @new_habit = Issue.new
   end
 
+
   def create
-    @habit = current_user.habits.build(habit_params)
+    @habit = HabitService.create_habit(User.current, habit_params)
     if @habit.save
-      render json: @habit, status: :created
+      render json: { status: "success", message: "Gewohnheit erfolgreich erstellt!", section: 'habits' }
     else
-      render json: @habit.errors, status: :unprocessable_entity
+      render json: { status: "error", message: @habit.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
   end
 
-  # Weitere Actions (show, update, destroy) hier hinzufügen
+  def update
+    if @habit.update(habit_params)
+      render json: { status: "success", message: "Gewohnheit erfolgreich aktualisiert!" }
+    else
+      render json: { status: "error", message: @habit.errors.full_messages.join(", ") }, status: :unprocessable_entity
+    end
+  end
+
+   def complete
+    @todo.status = 'Erledigt' # Update the status to "Erledigt"
+    if @todo.save
+      render json: { status: "success", message: "ToDo erfolgreich erledigt!" }
+    else
+      render json: { status: "error", message: @todo.errors.full_messages.join(", ") }, status: :unprocessable_entity
+    end
+  end
+  
+  def destroy
+    @habit.destroy
+    head :no_content
+  end
 
   private
 
-  def set_habit
+  def find_habit
     @habit = current_user.habits.find(params[:id])
   end
 
   def habit_params
-    params.require(:habit).permit(:name, :status, :priority)
+    params.require(:issue).permit(:subject, :description)
   end
 end
-
-# Wiederholen Sie dies für DailyTodos und GeneralTodos

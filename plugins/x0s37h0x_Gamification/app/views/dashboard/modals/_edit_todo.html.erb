@@ -1,0 +1,25 @@
+<!-- Modal for Editing a ToDo -->
+<div id="editTodoModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h2>ToDo bearbeiten</h2>
+
+    <div id="todo-form-message" class="form-message" style="display: none; color: red;"></div>
+
+    <%= form_for @new_todo, url: update_todo_path, remote: true, html: { id: "edit-todo-form" } do |f| %>
+      <div class="form-group">
+        <%= f.label :subject, 'Titel' %>
+        <%= f.text_field :subject, class: 'form-control', id: 'edit-todo-subject' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, 'Beschreibung' %>
+        <%= f.text_area :description, class: 'form-control', id: 'edit-todo-description' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :due_date, 'Fällig am' %>
+        <%= f.date_field :due_date, class: 'form-control', id: 'edit-todo-due-date' %>
+      </div>
+      <%= f.submit 'Speichern', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

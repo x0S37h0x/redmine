@@ -5,9 +5,12 @@
     <ul>
       <% @daily_tasks.each do |task| %>
         <li class="task-item" data-id="<%= task.id %>">
-          <input type="checkbox" class="task-checkbox" <% if task.status == 'closed' %> checked <% end %> >
+          <input type="checkbox" class="task-checkbox" data-task-id="<%= task.id %>" 
+       onclick="completeTask(<%= task.id %>, 'daily_tasks')" 
+       <% if task.status.name == 'Erledigt' %> checked <% end %> >
+
           <div class="task-content">
-            <strong><%= task.subject %></strong>
+            <strong class="task-title" data-id="<%= task.id %>" data-type="daily_tasks" onclick="openEditDailyTaskModal(<%= task.id %>)"><%= task.subject %></strong>
             <p><%= task.description %></p>
             <p><em>Fällig am: <%= task.due_date %></em></p>
           </div>

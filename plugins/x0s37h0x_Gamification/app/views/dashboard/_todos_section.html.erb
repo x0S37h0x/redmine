@@ -18,8 +18,8 @@
         <h3><%= project.name %></h3>
         <ul>
           <% todos.each do |todo| %>
-            <li class="task-item" data-id="<%= todo.id %>" data-due-date="<%= todo.due_date %>">
-              <input type="checkbox" class="task-checkbox" <% if todo.status == 'closed' %> checked <% end %> >
+            <li class="task-item" data-id="<%= todo.id %>" data-due-date="<%= todo.due_date %>" onclick="openEditTodoModal(<%= todo.id %>)">
+              <input type="checkbox" class="task-checkbox" <% if todo.status == 'closed' %> checked <% end %>>
               <div class="task-content">
                 <strong><%= todo.subject %></strong>
                 <p><%= todo.description %></p>
