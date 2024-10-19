@@ -3,12 +3,12 @@
   <div class="modal-content">
     <span class="close-modal" onclick="closeModal()">&times;</span>
     <h2>Bearbeite tägliche Aufgabe</h2>
-    
-   <% if @daily_task.present? %>
-  <form id="edit-daily-task-form" action="<%= update_daily_task_path(id: @daily_task.id) %>" method="POST" data-remote="true">
+    <% if @daily_task.present? %>
+    <form id="edit-daily-task-form" action="<%= update_daily_task_path(id: @daily_task.id) %>" method="POST" data-remote="true">
     <input type="hidden" name="_method" value="patch">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" id="edit-daily-task-id" name="task[id]" value="">
+    <input type="hidden" id="edit-daily-task-id" name="task[id]" value="">
+
 
       <div class="form-group">
         <label for="edit-daily-task-subject">Titel</label>
@@ -27,11 +27,8 @@
 
       <button type="submit" class="btn btn-primary">Speichern</button>
     </form>
-<% else %>
+    <% else %>
   <p>Die Aufgabe konnte nicht geladen werden.</p>
 <% end %>
-
-
-     
   </div>
 </div>

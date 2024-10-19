@@ -10,33 +10,32 @@ class DailyTasksController < ApplicationController
     end
   end
 
-  def edit
-  @daily_task = find_daily_task
-  if @daily_task
-    Rails.logger.info "Aufgabe gefunden: #{@daily_task.id}"
-    render json: {
-      id: @daily_task.id,
-      subject: @daily_task.subject,
-      description: @daily_task.description,
-      due_date: @daily_task.due_date
-    }
-  else
-    Rails.logger.error "Aufgabe nicht gefunden!"
-    render json: { status: "error", message: "Aufgabe nicht gefunden" }, status: :not_found
+   def edit
+    result = DailyTaskService.load_daily_task_for_edit(params[:id])
+
+    if result[:status] == 'success'
+      render json: {
+        id: result[:task].id,
+        subject: result[:task].subject,
+        description: result[:task].description,
+        due_date: result[:task].due_date
+      }
+    else
+      render json: { status: 'error', message: result[:message] }, status: :not_found
+    end
   end
-end
 
 
 
-  def update
-  @daily_task = find_daily_task
+   def update
+    result = DailyTaskService.update_daily_task(params[:id], daily_task_params)
 
-  if @daily_task.update(daily_task_params)
-    render json: { status: "success", message: "Tägliche Aufgabe erfolgreich aktualisiert!" }
-  else
-    render json: { status: "error", message: @daily_task.errors.full_messages.join(", ") }, status: :unprocessable_entity
+    if result[:status] == 'success'
+      render json: { status: 'success', task: result[:task] }
+    else
+      render json: { status: 'error', message: result[:message] }, status: :unprocessable_entity
+    end
   end
-end
 
   def complete
     if @daily_task
@@ -84,6 +83,6 @@ end
 
 
   def daily_task_params
-    params.require(:issue).permit(:subject, :description)
+    params.require(:issue).permit(:subject, :description, :due_date)
   end
 end

@@ -5,8 +5,9 @@ RedmineApp::Application.routes.draw do
   #resources :daily_todos, only: [:index, :show, :create, :update, :destroy]
   resources :todos, only: [:create,:edit, :update]
   resources :habits, only: [:create, :update, :destroy]
-  resources :daily_tasks, only: [:create, :update, :destroy, :complete]
-
+  resources :daily_tasks, only: [:create, :update, :destroy, :edit] do
+    post :complete, on: :member
+  end
   get 'dashboard', to: 'dashboard#index'
   get '/dashboard/update_section', to: 'dashboard#update_section'
   get 'dashboard/user_info', to: 'dashboard#user_info'
@@ -33,10 +34,10 @@ delete 'habits/destroy/:id', to: 'habits#destroy', as: 'destroy_habit'
 post 'daily_tasks/create', to: 'daily_tasks#create', as: 'new_daily_task'
 patch 'daily_tasks/update/:id', to: 'daily_tasks#update', as: 'update_daily_task'
 delete 'daily_tasks/destroy/:id', to: 'daily_tasks#destroy', as: 'destroy_daily_task'
-get 'daily_tasks/:id/edit', to: 'daily_tasks#edit', as: 'edit_daily_task'
+#get 'daily_tasks/:id/edit', to: 'daily_tasks#edit', as: 'edit_daily_task'
 
 patch 'todos/:id/complete', to: 'todos#complete', as: 'complete_todo'
 #patch 'daily_tasks/:id/complete', to: 'daily_tasks#complete', as: 'complete_daily_task'
 patch 'habits/:id/complete', to: 'habits#complete', as: 'complete_habit'
-post 'daily_tasks/:id/complete', to: 'daily_tasks#complete', as: 'complete_daily_task'
+#post 'daily_tasks/:id/complete', to: 'daily_tasks#complete', as: 'complete_daily_task'
 end

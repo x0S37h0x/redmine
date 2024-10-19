@@ -116,6 +116,15 @@ function completeTask(taskId, section) {
 }
 
 function openEditDailyTaskModal(taskId) {
+   console.log("Opening modal for task ID:", taskId);
+  console.log(document.getElementById('editDailyTaskModal'));
+   const modal = document.getElementById('editDailyTaskModal');
+  if (!modal) {
+    console.error('Modal element not found!');
+    return;
+  } else {
+    console.log('Modal element found:', modal);
+  }
   fetch(`/daily_tasks/${taskId}/edit`, {
     method: 'GET',
     headers: {
@@ -130,6 +139,8 @@ function openEditDailyTaskModal(taskId) {
     return response.json();
   })
   .then(data => {
+    // Öffne das Modal
+    openModal('editDailyTaskModal');
     // Fülle das Formular mit den erhaltenen Daten
     document.getElementById('edit-daily-task-id').value = data.id;
     document.getElementById('edit-daily-task-subject').value = data.subject;
@@ -149,18 +160,6 @@ function openEditDailyTaskModal(taskId) {
 }
 
 
-
-function openModal(modalId) {
-  var modal = document.getElementById(modalId);
-  modal.style.display = 'block';  // Show the modal
-}
-
-function closeModal() {
-  var modals = document.querySelectorAll('.modal');
-  modals.forEach(modal => {
-    modal.style.display = 'none';  // Explicitly hide the modal
-  });
-}
 
 
 // Function to open the modal
