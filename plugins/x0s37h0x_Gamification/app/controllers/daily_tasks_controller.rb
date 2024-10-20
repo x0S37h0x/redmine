@@ -2,7 +2,7 @@ class DailyTasksController < ApplicationController
   before_action :find_daily_task, only: [:update, :destroy, :complete, :edit]
 
   def create
-    @daily_task = DailyTaskService.create_daily_task(User.current, daily_task_params)
+    @daily_task = DailyTaskService.create_daily_task(User.current, daily_task_create_params)
     if @daily_task.save
       render json: { status: "success", message: "Tägliche Aufgabe erfolgreich erstellt!", section: 'daily_tasks' }
     else
@@ -28,14 +28,15 @@ class DailyTasksController < ApplicationController
 
 
    def update
-    result = DailyTaskService.update_daily_task(params[:id], daily_task_params)
+    @daily_task = Issue.find(params[:id])
 
-    if result[:status] == 'success'
-      render json: { status: 'success', task: result[:task] }
+    if @daily_task.update(daily_task_update_params.to_h)
+      render json: { status: "success", message: "Aufgabe erfolgreich aktualisiert" }
     else
-      render json: { status: 'error', message: result[:message] }, status: :unprocessable_entity
+      render json: { status: "error", message: @daily_task.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
   end
+
 
   def complete
     if @daily_task
@@ -82,7 +83,17 @@ end
 
 
 
-  def daily_task_params
+ # def daily_task_params
+ #   params.require(:task).permit(:id,:subject, :description, :due_date)
+ # end
+   # Params für das Erstellen eines ToDos
+  def daily_task_create_params
     params.require(:issue).permit(:subject, :description, :due_date)
   end
+
+  # Params für das Aktualisieren eines ToDos
+  def daily_task_update_params
+    params.require(:task).permit(:id,:subject, :description, :due_date)
+  end
+
 end

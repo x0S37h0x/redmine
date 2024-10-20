@@ -7,7 +7,7 @@ Backend :
 
 Dashboard : 
     Design verbesserungen
-    Todos Anklick und bearbeitbar machen
+    Tägliche ToDo komplexität auswählbar machen.
     Fälligkeitsdatum + Komplexität in der Erstellung einfügen
     Calender Section mit aktuallisieren.
 

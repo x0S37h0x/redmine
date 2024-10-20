@@ -19,6 +19,9 @@ module IssuePatch
     # Prüfe, ob die Aufgabe den Custom Tracker "Tägliche Aufgabe" hat
     return unless tracker.name == 'Tägliche Aufgabe'
 
+     # Skip logic if this is a new task, because no previous status exists
+    return if @previous_status.nil?
+
     # Hole die Komplexität aus dem CustomField
     complexity = custom_field_value(CustomField.find_by_name('Komplexität'))
     return unless complexity # Keine Komplexität definiert, keine Aktion

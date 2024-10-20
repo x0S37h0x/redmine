@@ -139,13 +139,40 @@ function openEditDailyTaskModal(taskId) {
     return response.json();
   })
   .then(data => {
+      console.log('Received data:', data);
     // Öffne das Modal
-    openModal('editDailyTaskModal');
+    
     // Fülle das Formular mit den erhaltenen Daten
-    document.getElementById('edit-daily-task-id').value = data.id;
-    document.getElementById('edit-daily-task-subject').value = data.subject;
-    document.getElementById('edit-daily-task-description').value = data.description;
-    document.getElementById('edit-daily-task-due-date').value = data.due_date || ''; // Fälligkeitsdatum
+     if (data.status === "error") {
+      alert("Fehler beim Laden der Aufgabe: " + data.message);
+      return;
+    }
+
+
+  let taskIdField = document.getElementById('edit-daily-task-id');
+  let taskSubjectField = document.getElementById('edit-daily-task-subject');
+  let taskDescriptionField = document.getElementById('edit-daily-task-description');
+  let taskDueDateField = document.getElementById('edit-daily-task-due-date');
+
+  if (!taskIdField) {
+    console.error('Task ID field missing in the DOM.');
+  }
+  if (!taskSubjectField) {
+    console.error('Task Subject field missing in the DOM.');
+  }
+  if (!taskDescriptionField) {
+    console.error('Task Description field missing in the DOM.');
+  }
+  if (!taskDueDateField) {
+    console.error('Task Due Date field missing in the DOM.');
+  }
+
+  // If all fields are present
+  if (taskIdField && taskSubjectField && taskDescriptionField && taskDueDateField) {
+    taskIdField.value = data.id;
+    taskSubjectField.value = data.subject;
+    taskDescriptionField.value = data.description;
+    taskDueDateField.value = data.due_date || ''; // Fälligkeitsdatum
 
     // Setze die Action-URL des Formulars dynamisch mit der Task-ID
     const form = document.getElementById('edit-daily-task-form');
@@ -153,6 +180,7 @@ function openEditDailyTaskModal(taskId) {
 
     // Öffne das Modal
     openModal('editDailyTaskModal');
+  }
   })
   .catch(error => {
     console.error('Error fetching daily task data: ', error);

@@ -32,7 +32,7 @@ delete 'habits/destroy/:id', to: 'habits#destroy', as: 'destroy_habit'
 
 # routes for DailyTask
 post 'daily_tasks/create', to: 'daily_tasks#create', as: 'new_daily_task'
-patch 'daily_tasks/update/:id', to: 'daily_tasks#update', as: 'update_daily_task'
+patch 'daily_tasks/:id/update', to: 'daily_tasks#update', as: 'update_daily_task'
 delete 'daily_tasks/destroy/:id', to: 'daily_tasks#destroy', as: 'destroy_daily_task'
 #get 'daily_tasks/:id/edit', to: 'daily_tasks#edit', as: 'edit_daily_task'
 
